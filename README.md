@@ -2,6 +2,7 @@
 
 **Subject:** Formal Languages and Automata Theory (FLAT)  
 **Topics:** Deterministic Finite Automata (DFA), Pattern Matching, Suffix Transitions  
+**Author / Student:** Easala Jagadeesh  
 
 ---
 

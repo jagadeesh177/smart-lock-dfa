@@ -2,7 +2,7 @@
 
 **Course:** Formal Languages and Automata Theory (FLAT)  
 **Topic:** Deterministic Finite Automata (DFA) Construction and String Matching  
-**Student/Author:** jagadeesh177  
+**Student/Author:** Easala Jagadeesh  
 
 ---
 
