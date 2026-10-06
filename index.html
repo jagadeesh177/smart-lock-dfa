@@ -155,13 +155,16 @@ async function getJSON(url) {
 
 async function setCode() {
   const code = document.getElementById("code").value.trim();
+  const feedback = document.getElementById("codeErr");
   try {
     const d = await getJSON("/dfa?code=" + encodeURIComponent(code));
     CODE = d.code; TABLE = d.table; KEYS = "";
-    document.getElementById("codeErr").textContent = "";
+    feedback.style.color = "var(--ok)";
+    feedback.textContent = `DFA compiled and active for code: ${CODE}`;
     drawTable(); await update();
   } catch (e) {
-    document.getElementById("codeErr").textContent = "Error: Secret code must be 1 to 6 numeric digits.";
+    feedback.style.color = "var(--bad)";
+    feedback.textContent = "Error: Secret code must be 1 to 6 numeric digits.";
   }
 }
 
@@ -275,6 +278,22 @@ document.addEventListener("keydown", e => {
   if (/^[0-9]$/.test(e.key) && document.activeElement.id !== "code") press(e.key);
   if (e.key === "Backspace" && document.activeElement.id !== "code") backspaceKey();
   if (e.key === "Escape" && document.activeElement.id !== "code") clearKeys();
+});
+
+const codeInput = document.getElementById("code");
+codeInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    setCode();
+  }
+});
+codeInput.addEventListener("input", () => {
+  const current = codeInput.value.trim();
+  const feedback = document.getElementById("codeErr");
+  if (current !== CODE) {
+    feedback.style.color = "var(--muted)";
+    feedback.textContent = `Click "Build DFA" or press Enter to activate code ${current} (current: ${CODE})`;
+  }
 });
 
 setCode();
