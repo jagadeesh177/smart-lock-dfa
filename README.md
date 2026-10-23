@@ -3,6 +3,8 @@
 **Subject:** Formal Languages and Automata Theory (FLAT)  
 **Topics:** Deterministic Finite Automata (DFA), Pattern Matching, Suffix Transitions  
 **Author / Student:** Easala Jagadeesh  
+**Live Deployed Application:** [https://smart-lock-dfa.vercel.app](https://smart-lock-dfa.vercel.app)  
+**GitHub Repository:** [https://github.com/jagadeesh177/smart-lock-dfa](https://github.com/jagadeesh177/smart-lock-dfa)  
 
 ---
 
@@ -70,9 +72,11 @@ Naive states: 0 -> 1 -> 2 -> 3 -> 0 -> 1 -> 0  (Misses match due to greedy reset
 
 ## How to Run
 
-The project requires Python 3 with no third-party dependencies (standard library only).
+### 1. Live Web Application (Vercel)
+Access the production application directly:
+**[https://smart-lock-dfa.vercel.app](https://smart-lock-dfa.vercel.app)**
 
-### 1. Web Dashboard
+### 2. Local Web Dashboard
 Start the local HTTP server:
 ```bash
 python app.py
@@ -83,12 +87,7 @@ Open your browser at **http://localhost:8002**.
 * Real-time side-by-side execution trace for both locks.
 * "Simulate Overlapping Sequence" button to test the `121213` scenario.
 
-Optional arguments:
-```bash
-python app.py --port 8080
-```
-
-### 2. Terminal Mode
+### 3. Terminal Mode
 Run the default verification and demonstration:
 ```bash
 python main.py
@@ -111,7 +110,10 @@ python main.py --interactive
 | File | Description |
 |---|---|
 | `main.py` | DFA construction, execution simulation, naive lock comparison, and CLI |
-| `app.py` | Built-in HTTP server exposing REST endpoints for the web interface |
+| `app.py` | Local HTTP server exposing REST endpoints for the web interface |
 | `index.html` | Web interface featuring keypad, SVG state diagram, and dual lock comparison |
-| `PROJECT_REPORT.md` | Formal academic project report covering theory, derivations, and analysis |
+| `api/index.py` | Vercel serverless function entrypoint |
+| `vercel.json` | Vercel serverless routing configuration |
+| `requirements.txt` | Python configuration for Vercel serverless deployment |
+| `3_FLAT_Report_Easala_Jagadeesh.pdf` | Formal academic project report covering theory, derivations, and analysis |
 | `README.md` | Project overview, setup, and usage documentation |

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/dfa", "destination": "/api/index.py?endpoint=dfa" },
+    { "source": "/run", "destination": "/api/index.py?endpoint=run" },
+    { "source": "/api/dfa", "destination": "/api/index.py?endpoint=dfa" },
+    { "source": "/api/run", "destination": "/api/index.py?endpoint=run" }
+  ]
+}
