@@ -161,6 +161,21 @@ def print_comparison(table, code, test_cases):
         print(f"  {keys:<16}{exp_text:<12}{naive_text:<14}{dfa_text:<12}{status}")
 
 
+def print_steps(code, keys, dfa_path, naive_path, limit=40):
+    """Prints every key press: the DFA's move and what it has matched, next to the naive lock's move."""
+    if len(keys) > limit:
+        print(f"\n  (step-by-step table shown for up to {limit} keys)")
+        return
+    k = len(code)
+    print("\n  Step by step (DFA state i = the last i keys match the first i digits of the code):")
+    print(f"  {'step':>4}  {'key':>3}   {'DFA move':<10}{'matched':<10}{'naive move':<12}note")
+    for i, key in enumerate(keys):
+        a, b = dfa_path[i], dfa_path[i + 1]
+        na, nb = naive_path[i], naive_path[i + 1]
+        note = "DFA opens" if b == k else (f"naive lock forgets '{code[:b]}'" if nb < b else "")
+        print(f"  {i + 1:>4}  {key:>3}   {f'{a} -> {b}':<10}{repr(code[:b]):<10}{f'{na} -> {nb}':<12}{note}")
+
+
 def run_interactive(code):
     """Interactive CLI keypad loop."""
     table = build_dfa(code)
@@ -215,6 +230,9 @@ def main():
     if not code.isdigit():
         print("Error: code must contain only numeric digits.")
         sys.exit(1)
+    if args.keys and not args.keys.isdigit():
+        print("Error: keys must contain only numeric digits.")
+        sys.exit(1)
 
     table = build_dfa(code)
 
@@ -238,6 +256,7 @@ def main():
         print(f"  Expected     : {'OPEN' if expected else 'SHUT'}")
         if expected and not naive_open:
             print("  Result       : Naive lock failed; DFA lock succeeded via suffix fallback.")
+        print_steps(code, keys, dfa_path, naive_path)
         return
 
     # Default demonstration

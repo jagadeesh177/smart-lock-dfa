@@ -93,7 +93,7 @@ Run the default verification and demonstration:
 python main.py
 ```
 
-Evaluate a specific code and input sequence:
+Evaluate a specific code and input sequence (prints both locks' state paths and a step-by-step table, one row per key, showing each DFA move, what is matched, and where the naive lock forgets a partial match; codes and keys that are not digits are rejected):
 ```bash
 python main.py --code 1213 --keys 121213
 ```
@@ -102,6 +102,12 @@ Launch the interactive keypad in the terminal:
 ```bash
 python main.py --interactive
 ```
+
+### 4. Tests
+```bash
+python -m unittest discover tests
+```
+8 unit tests: the transition table for 1213 checked against a hand derivation, every move checked against the definition, exhaustive checks of key sequences, the naive lock's failure, input checking and a long input.
 
 ---
 
@@ -115,5 +121,6 @@ python main.py --interactive
 | `api/index.py` | Vercel serverless function entrypoint |
 | `vercel.json` | Vercel serverless routing configuration |
 | `requirements.txt` | Python configuration for Vercel serverless deployment |
-| `3_FLAT_Report_Easala_Jagadeesh.pdf` | Formal academic project report covering theory, derivations, and analysis |
+| `tests/test_lock.py` | 8 unit tests (construction, simulation, input checking) |
+| `FLAT_Report_Easala_Jagadeesh.pdf` | Formal academic project report covering theory, derivations, test cases and analysis |
 | `README.md` | Project overview, setup, and usage documentation |
